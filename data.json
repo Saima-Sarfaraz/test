@@ -1,0 +1,28 @@
+[
+    {
+      "id": 1,
+      "price": 29.99,
+      "description": "Wireless Bluetooth Headphones"
+    },
+    {
+      "id": 2,
+      "price": 59.99,
+      "description": "4K UHD Smart TV - 55 inches"
+    },
+    {
+      "id": 3,
+      "price": 199.99,
+      "description": "Laptop 16GB RAM, 512GB SSD"
+    },
+    {
+      "id": 4,
+      "price": 15.99,
+      "description": "Portable Bluetooth Speaker"
+    },
+    {
+      "id": 5,
+      "price": 49.99,
+      "description": "Smartwatch with Fitness Tracker"
+    }
+  ]
+  

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Cards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .product-card {
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 200px;
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      background-color: #fff;
+      margin: 5px;
+    }
+
+    .product-card h3 {
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .product-card p {
+      color: #777;
+      font-size: 1rem;
+    }
+
+    .product-card .price {
+      font-size: 1.5rem;
+      color: green;
+      margin: 10px 0;
+    }
+
+    .product-card button {
+      background-color: #007bff;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .product-card button:hover {
+      background-color: #0056b3;
+    }
+
+    #product-container{
+        display: flex;
+        flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="product-container"></div>
+
+  <script>
+
+    // Fetching the data from the JSON file
+    fetch('data.json')
+      .then(response => {
+        // if (!response.ok) {
+        //   throw new Error('Network response was not ok ' + response.statusText);
+        // }
+        return response.json();
+      })
+      .then(data => {
+        // Get the container element
+        const container = document.getElementById('product-container');
+
+        // Loop through each product and create a card for each one
+        data.forEach(product => {
+          // Create the product card
+          const productCard = document.createElement('div');
+          productCard.classList.add('product-card');
+
+          // Set the inner HTML for the product card
+          productCard.innerHTML = `
+            <h3>Product ${product.id}</h3>
+            <p>${product.description}</p>
+            <p class="price">$${product.price.toFixed(2)}</p>
+            <a href="./details.html?id=${product.id}"><button>Details</button></a>
+          `;
+
+          // Append the card to the container
+          container.appendChild(productCard);
+        });
+      })
+      .catch(error => {
+        console.error('There was a problem with the fetch operation:', error);
+      });
+  </script>
+
+</body>
+</html>

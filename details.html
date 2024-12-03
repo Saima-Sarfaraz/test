@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        
+        // Fetch the data from data.json
+fetch('data.json')
+  .then(response => response.json())  // Parse the JSON data
+  .then(data => {
+    // Function to search for a product by its ID
+    function searchProductById(id) {
+      const product = data.find(p => p.id === id);  // Use .find() to search by id
+      if (product) {
+        console.log('Product Found:', product);
+      } else {
+        console.log('Product not found');
+      }
+    }
+    url = new URL(window.location.href);
+    params = new URLSearchParams(url.search);
+    paramName = params.get('id');
+    
+    // Example usage: Search for product with id 3
+    searchProductById(5);
+  })
+  .catch(error => {
+    console.error('There was an error with the fetch operation:', error);
+  });
+
+       
+    </script>
+</body>
+</html>
