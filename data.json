@@ -23,6 +23,11 @@
       "id": 5,
       "price": 49.99,
       "description": "Smartwatch with Fitness Tracker"
+    },
+    {
+      "id": 6,
+      "price": 100,
+      "description": "Mobile"
     }
   ]
   

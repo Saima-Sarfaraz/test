@@ -3,37 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Product Display</title>
+    <style>
+        /* Basic styling for the card */
+        .product-card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+        }
+
+        .product-card h2 {
+            font-size: 1.5em;
+            margin-top: 15px;
+        }
+
+        .product-card p {
+            color: #555;
+            font-size: 1em;
+            margin: 10px 0;
+        }
+
+        .product-card .price {
+            font-size: 1.2em;
+            color: #e74c3c;
+        }
+    </style>
 </head>
 <body>
+    <div id="product-container"></div>  <!-- Container for the product card -->
+
     <script>
-
-        
         // Fetch the data from data.json
-fetch('data.json')
-  .then(response => response.json())  // Parse the JSON data
-  .then(data => {
-    // Function to search for a product by its ID
-    function searchProductById(id) {
-      const product = data.find(p => p.id === id);  // Use .find() to search by id
-      if (product) {
-        console.log('Product Found:', product);
-      } else {
-        console.log('Product not found');
-      }
-    }
-    url = new URL(window.location.href);
-    params = new URLSearchParams(url.search);
-    paramName = params.get('id');
-    
-    // Example usage: Search for product with id 3
-    searchProductById(5);
-  })
-  .catch(error => {
-    console.error('There was an error with the fetch operation:', error);
-  });
+        fetch('data.json')
+          .then(response => response.json())  // Parse the JSON data
+          .then(data => {
+            // Function to search for a product by its ID
+            function searchProductById(id) {
+              const product = data.find(p => p.id === id);  // Use .find() to search by id
+              if (product) {
+                displayProductCard(product);  // If product is found, display it
+              } else {
+                console.log('Product not found');
+                document.getElementById('product-container').innerHTML = '<p>Product not found.</p>';
+              }
+            }
 
-       
+            // Get the URL parameters
+            const url = new URL(window.location.href);
+            const params = new URLSearchParams(url.search);
+            const paramName = params.get('id');
+            
+            // Convert paramName to a number before searching
+            const id = Number(paramName);  // Ensure it's a number
+            
+            // Example usage: Search for product by id
+            searchProductById(id);
+          })
+          .catch(error => {
+            console.error('There was an error with the fetch operation:', error);
+          });
+
+        // Function to display the product in a card layout
+        function displayProductCard(product) {
+          const productContainer = document.getElementById('product-container');
+          
+          const productCard = document.createElement('div');
+          productCard.classList.add('product-card');
+          
+          productCard.innerHTML = `
+            <h2>Product ${product.id}</h2>
+            <p>${product.description}</p>
+            <p class="price">$${product.price}</p>
+          `;
+          
+          productContainer.appendChild(productCard);  // Add the card to the container
+        }
     </script>
 </body>
 </html>
